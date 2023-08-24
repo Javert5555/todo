@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <script defer src="./js/textarea.js"></script>
+    <script defer src="./js/main.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1 class="header__title">Добавить задачу</h1>
+        <form class="header__task-form" id="task-form">
+            <input
+                type="text"
+                name="task-input"
+                id="task-input"
+                placeholder="Задача..."
+                class="header__task-input"
+            >
+            <label class="header__task-container-submit">
+                <input
+                    type="submit"
+                    id="task-submit"
+                    value=""
+                    class="header__task-submit"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" class="header__task-submit-icon" height="48" viewBox="0 -960 960 960" width="48"><path d="M450-450H200v-60h250v-250h60v250h250v60H510v250h-60v-250Z"/></svg>
+            </label>
+        </form>
+    </header>
+
+    <main class="main">
+        <section class="tasks">
+            <h2 class="tasks__title">Задачи</h2>
+
+            <ul class="task-list">
+                <!-- <li class="task_list__item">
+                    <div class="task-list__btn-container">
+                        <button class="task_list__btn task_list__complete">
+                            <svg class="task_list__icon task_list__complete-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ><path d="M378-246 154-470l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                        </button>
+                    </div>
+                    <div class="task_list__item-content">
+                        <input
+                            type="text"
+                            name="task_text"
+                            id="task_text"
+                            value=""
+                            class="task_list__item-text"
+                            readonly
+                        >
+                    </div>
+                    <div class="task-list__actions">
+                        <button class="task_list__btn task_list__edit">
+                            <svg class="task_list__icon task_list__edit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M180-180h44l443-443-44-44-443 443v44Zm614-486L666-794l42-42q17-17 42-17t42 17l44 44q17 17 17 42t-17 42l-42 42Zm-42 42L248-120H120v-128l504-504 128 128Zm-107-21-22-22 44 44-22-22Z"/></svg>
+                        </button>
+                        <button class="task_list__btn task_list__delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="task_list__icon task_list__delete-icon" viewBox="0 -960 960 960"><path d="m249-207-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg>
+                        </button>
+                    </div>
+                </li> -->
+            </ul>
+
+        </section>
+    </main>
+
+</body>
+</html>
