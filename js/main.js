@@ -109,13 +109,6 @@ function completeTask () {
         taskListItemText.style.textDecoration = 'none'
         moveDownCompleteTasks()
     }
-
-
-
-    console.log(uuid)
-    console.log(localStorage)
-
-    // findCompleteTasks()
 }
 
 function editTask () {
