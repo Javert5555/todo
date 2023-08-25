@@ -176,6 +176,7 @@ li {
     border-radius: 90%;
     padding: .25rem;
     transition: all .45s ease;
+    z-index: 1000;
 }
 
 .task_list__btn:hover {
@@ -187,6 +188,7 @@ li {
 }
 
 .task_list__icon {
+    z-index: 1;
     cursor: pointer;
     width: 1.45rem;
     height: 1.45rem;

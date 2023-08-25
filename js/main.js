@@ -33,30 +33,6 @@ function deleteTask (index) {
     showTasks()
 }
 
-// function editTask (index) {
-//     const taskItemsValue = JSON.parse(localStorage.getItem('tasks'))
-//     const taskItems = Array.from(document.querySelectorAll('.task_list__item'))
-
-//     const taskListItemText = Array.from(document.querySelectorAll('.task_list__item-text'))
-//     taskListItemText[index].removeAttribute('readonly')
-//     taskListItemText[index].focus()
-//     taskListItemText[index].setSelectionRange(taskListItemText[index].value.length, taskListItemText[index].value.length)
-//     taskListItemText[index].style.color = '#146189'
-//     taskListItemText[index].addEventListener('blur', () => {
-//         if (!taskListItemText[index].value) {
-//             taskItemsValue.splice(index, 1)
-//             localStorage.setItem('tasks', JSON.stringify(taskItemsValue))
-//             taskItems[index].remove()
-//             showTasks()
-//             return
-//         }
-//         taskListItemText[index].setAttribute('readonly', '')
-//         taskListItemText[index].style.color = '#F2F2F2'
-//         taskItemsValue[index] = taskListItemText[index].value
-//         localStorage.setItem('tasks', JSON.stringify(taskItemsValue))
-//     })
-// }
-
 function editTask (index) {
     const taskItemsValue = JSON.parse(localStorage.getItem('tasks'))
     const taskItems = Array.from(document.querySelectorAll('.task_list__item'))
@@ -94,9 +70,19 @@ function editTask (index) {
 
 function completeTask (index) {
     const taskItemsValue = JSON.parse(localStorage.getItem('tasks'))
+    const completeTaskIndexes = JSON.parse(localStorage.getItem('taskIndexes')) ? JSON.parse(localStorage.getItem('taskIndexes')) : [] //
+    
+
     const taskListItemText = Array.from(document.querySelectorAll('.task_list__item-text'))
     taskListItemText[index].style.textDecoration = 'line-through'
 
+    const removedTaskItemsValue = taskItemsValue.splice(index, 1)[0]
+    taskItemsValue.push(removedTaskItemsValue) //
+    completeTaskIndexes.push(taskItemsValue.length - 1) //
+    localStorage.setItem('taskIndexes', JSON.stringify(completeTaskIndexes)) //
+    localStorage.setItem('tasks', JSON.stringify(taskItemsValue))
+
+    showTasks()
 }
 
 function appendTask () {
@@ -135,7 +121,7 @@ function showTasks () {
     taskList.innerHTML = taskItems
     addListenersToActionBtns('.task_list__delete', deleteTask)
     addListenersToActionBtns('.task_list__edit', editTask)
-    // addListenersToActionBtns('.task_list__complete', completeTask)
+    addListenersToActionBtns('.task_list__complete', completeTask)
 }
 
 ///////////////////////////////////////////
