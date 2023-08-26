@@ -210,6 +210,20 @@ li {
 
     margin: 1.2rem 0;
     background-color: var(--light-dark);
+    transition: all 2s ease;
+
+
+}
+
+.even:nth-child(even) {
+    background-color: #591E19;
+
+}
+
+.odd:nth-child(odd) {
+    /* color: #000; */
+    background-color: #2A2440;
+    
 
 }
 
@@ -308,21 +322,30 @@ li {
 
 @media (min-width: 992px) and (max-width: 1199px) {
     body {
-        padding: 2rem 9rem;
+        padding: 2rem 12rem;
     }
+
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
     body {
-        padding: 2rem 5rem;
+        padding: 2rem 6rem;
     }
 
     .task_list__item-text {
         padding: 0.375rem 0rem;
     }
+
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    body {
+        padding: 2rem 4rem;
+    }
 }
 
 @media (max-width: 575px) {
+
     .task_list__item-text {
         padding: .375rem .1rem;
         font-size: .85rem;
@@ -342,4 +365,5 @@ li {
         width: 1.25rem;
         height: 1.25rem;
     }
+    
 }

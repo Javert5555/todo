@@ -1,4 +1,4 @@
-const getTaskListItem = (uuid, value) => `<li class="task_list__item" data-task-uuid="${uuid}">
+const getTaskListItem = (uuid, value) => `<li class="task_list__item task_list__item_modern" data-task-uuid="${uuid}">
 <div class="task-list__btn-container">
     <button class="task_list__btn task_list__complete" data-task-uuid="${uuid}">
         <svg class="task_list__icon task_list__complete-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ><path d="M378-246 154-470l43-43 181 181 384-384 43 43-427 427Z"/></svg>
@@ -109,6 +109,9 @@ function completeTask () {
         taskListItemText.style.textDecoration = 'none'
         moveDownCompleteTasks()
     }
+
+    selectElementsByParity('evenElementsStatus', 'even')
+    selectElementsByParity('oddElementsStatus', 'odd')
 }
 
 function editTask () {
@@ -128,13 +131,14 @@ function editTask () {
             delete tasks[uuid]
             localStorage.setItem('tasks', JSON.stringify(tasks))
             taskItem.remove()
+            selectElementsByParity('evenElementsStatus', 'even')
+            selectElementsByParity('oddElementsStatus', 'odd')
             return
         }
         taskListItemText.setAttribute('readonly', '')
         taskListItemText.style.color = '#F2F2F2'
         tasks[uuid]['title'] = taskListItemText.value
         localStorage.setItem('tasks', JSON.stringify(tasks))
-        console.log(this)
     }
 
     
@@ -162,6 +166,8 @@ function deleteTask () {
     localStorage.setItem('tasks', JSON.stringify(tasks))
 
     taskListItem.remove()
+    selectElementsByParity('evenElementsStatus', 'even')
+    selectElementsByParity('oddElementsStatus', 'odd')
 }
 
 function addListenersToActionBtns (selector, callback) {
@@ -192,6 +198,11 @@ function appendTask () {
     addListenersToActionBtns('.task_list__delete', deleteTask)
     addListenersToActionBtns('.task_list__edit', editTask)
     addListenersToActionBtns('.task_list__complete', completeTask)
+
+    moveDownCompleteTasks()
+
+    selectElementsByParity('evenElementsStatus', 'even')
+    selectElementsByParity('oddElementsStatus', 'odd')
 }
 
 function showTasks () {
@@ -210,7 +221,64 @@ function showTasks () {
     addListenersToActionBtns('.task_list__edit', editTask)
     addListenersToActionBtns('.task_list__complete', completeTask)
 
-    if (Object.keys(tasks).length > 0) findCompleteTasks()
+    if (Object.keys(tasks).length > 0) {
+        findCompleteTasks()
+
+        moveDownCompleteTasks() //
+
+        selectElementsByParity('evenElementsStatus', 'even')
+        selectElementsByParity('oddElementsStatus', 'odd')
+    }
+}
+
+function selectElementsByParity (parityStatus, className) {
+    const parityElementsStatus = JSON.parse(localStorage.getItem(parityStatus))
+
+    const taskListItems = Array.from(document.querySelectorAll('.task_list__item'))
+
+    for (let i = 0; i < taskListItems.length; i++) {
+        taskListItems[i].classList.remove(className)
+        if (parityElementsStatus && className === 'odd') {
+            if (i % 2 === 0) {
+                taskListItems[i].classList.add(className)
+            }
+        } else if (parityElementsStatus && className === 'even') {
+            if (i % 2 !== 0) {
+                taskListItems[i].classList.add(className)
+            }
+        }
+    }
+
+}
+
+function addListenersToSelectElementsBtns (btn, parityStatus, className) {
+    btn.addEventListener('click', () => {
+        if (localStorage.getItem(parityStatus) === null) {
+            localStorage.setItem(parityStatus, JSON.stringify(false))
+        }
+        const parityElementsStatus = !JSON.parse(localStorage.getItem(parityStatus))
+        localStorage.setItem(parityStatus, parityElementsStatus)
+        selectElementsByParity(parityStatus, className)
+
+    })
+}
+
+function addListenersForLastFirstElemDelBtns (btn, position) {
+    btn.addEventListener('click', () => {
+
+        const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : {}
+
+        const taskUuid = position === 'first' ? Object.keys(tasks)[0] : Object.keys(tasks)[Object.keys(tasks).length - 1]
+
+        if (Object.keys(tasks).length > 0) {
+            const data = {
+                'dataset': {
+                    'taskUuid': taskUuid
+                }
+            }
+            deleteTask.call(data)
+        }
+    })
 }
 
 ///////////////////////////////////////////
@@ -218,6 +286,18 @@ function showTasks () {
 window.addEventListener('load', () => {
     const taskInput = document.querySelector('#task-input')
     const taskSubmit = document.querySelector('#task-submit')
+    const selectOddElementBtn = document.querySelector('.menu__item-btn-odd')
+    const selectEvenElementBtn = document.querySelector('.menu__item-btn-even')
+    const deleteFirstTaskElement = document.querySelector('.menu__item-btn-del-first')
+    const deleteLastTaskElement = document.querySelector('.menu__item-btn-del-last')
+
+    const menuBtn = document.querySelector('.menu-btn')
+    const menu = document.querySelector('.menu')
+    menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active')
+        menu.classList.toggle('active')
+    })
+
     showTasks()
 
     taskSubmit.addEventListener('click', e => {
@@ -230,6 +310,9 @@ window.addEventListener('load', () => {
         appendTask()
     })
 
-
+    addListenersToSelectElementsBtns(selectEvenElementBtn, 'evenElementsStatus', 'even')
+    addListenersToSelectElementsBtns(selectOddElementBtn, 'oddElementsStatus', 'odd')
+    addListenersForLastFirstElemDelBtns(deleteFirstTaskElement, 'first')
+    addListenersForLastFirstElemDelBtns(deleteLastTaskElement, 'last')
 
 })
