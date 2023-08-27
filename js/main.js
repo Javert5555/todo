@@ -190,11 +190,11 @@ function editTask() {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }
 
-  taskListItemText.addEventListener('blur', function cb() {
+  taskListItemText.addEventListener('blur', () => {
     onFocus.call(this)
   })
 
-  taskListItemText.addEventListener('keydown', function cb(e) {
+  taskListItemText.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       onFocus.call(this)
     }
