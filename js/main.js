@@ -304,7 +304,7 @@ window.addEventListener('load', () => {
 
         e.preventDefault()
         if (!taskInput.value) {
-            alert('Укажите задачу')
+            // alert('Укажите задачу')
             return
         }
         appendTask()
