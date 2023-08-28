@@ -1,7 +1,7 @@
 /**
  * Get html code of new list item with unique UUID.
- * @param {value} str - The text that the user enters.
- * @param {uuid} str - A randomly generated v4 UUID of 36 characters.
+ * @param {String} value - The text that the user enters.
+ * @param {String} uuid - A randomly generated v4 UUID of 36 characters.
  */
 function getTaskListItem(uuid, value) {
   return `<li class="task_list__item task_list__item_modern" data-task-uuid="${uuid}">
@@ -31,6 +31,7 @@ function getTaskListItem(uuid, value) {
   </div>
   </li>`
 }
+
 /**
  * Get a string containing a randomly generated v4 UUID of 36 characters.
  */
@@ -41,8 +42,8 @@ function getUuid() {
 
 /**
  * Get an element with a specific uuid from a list of all elements with that selector.
- * @param {selector} str - The selector by which to get the html elements.
- * @param {uuid} str - A randomly generated v4 UUID of 36 characters
+ * @param {String} selector - The selector by which to get the html elements.
+ * @param {String} uuid - A randomly generated v4 UUID of 36 characters
  * that is needed to find a specific html element.
  */
 function getElementByUuid(selector, uuid) {
@@ -103,8 +104,8 @@ function moveDownCompleteTasks() {
 
 /**
  * Highlights even or odd items in the task list.
- * @param {parityStatus} boolean - Defines the selection status of odd and even elements.
- * @param {className} str - The name of the class (odd or even) to be added to the list of
+ * @param {Boolean} parityStatus - Defines the selection status of odd and even elements.
+ * @param {String} className - The name of the class (odd or even) to be added to the list of
  * classes for each element of the task list.
  */
 function selectElementsByParity(parityStatus, className) {
@@ -299,9 +300,9 @@ function showTasks() {
 
 /**
  * Add an event listener to the button that highlights even or odd items in the task list.
- * @param {btn} object - A button that selects odd or even list items.
- * @param {parityStatus} boolean - Defines the selection status of odd and even elements.
- * @param {className} str - The name of the class (odd or even) to be added to the list of
+ * @param {Object} btn - A button that selects odd or even list items.
+ * @param {Boolean} parityStatus - Defines the selection status of odd and even elements.
+ * @param {String} className - The name of the class (odd or even) to be added to the list of
  * classes for each element of the task list.
  */
 function addListenersToSelectElementsBtns(btn, parityStatus, className) {
@@ -317,8 +318,8 @@ function addListenersToSelectElementsBtns(btn, parityStatus, className) {
 
 /**
  * Add an event listener on a button that removes either the first or last element of the task list.
- * @param {btn} object - Delete first or last item button.
- * @param {position} str - Specifies which element to remove first or last.
+ * @param {Object} btn - Delete first or last item button.
+ * @param {String} position - Specifies which element to remove first or last.
  */
 function addListenersForLastFirstElemDelBtns(btn, position) {
   btn.addEventListener('click', () => {
