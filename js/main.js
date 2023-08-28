@@ -353,6 +353,11 @@ window.addEventListener('load', () => {
     menu.classList.toggle('active')
   })
 
+  menuBtn.addEventListener('blur', () => {
+    menuBtn.classList.remove('active')
+    menu.classList.remove('active')
+  })
+
   showTasks()
 
   taskSubmit.addEventListener('click', (e) => {
